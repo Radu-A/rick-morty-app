@@ -10,9 +10,14 @@ export class CharacterService {
   private baseUrl = 'https://rickandmortyapi.com/api/character';
 
   constructor(private http: HttpClient) {}
-  getAllCharacters(): Observable<CharacterInterface[]> {
+  getAllCharacters(name: string | null): Observable<CharacterInterface[]> {
+    if (!name) {
+      return this.http
+        .get<ResponseInterface>(this.baseUrl)
+        .pipe(map((response: ResponseInterface) => response.results));
+    }
     return this.http
-      .get<ResponseInterface>(this.baseUrl)
+      .get<ResponseInterface>(`${this.baseUrl}/?name=${name.toLowerCase()}`)
       .pipe(map((response: ResponseInterface) => response.results));
   }
 }

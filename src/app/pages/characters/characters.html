@@ -2,8 +2,15 @@
   <section class="search-section">
     <img src="pngegg.png" alt="Logo" class="logo" />
     <div class="search-container">
-      <input type="text" placeholder="Search characters (RxJS practice...)" class="search-input" />
+      <input
+        class="search-input"
+        id="name"
+        type="text"
+        placeholder="Name of the character..."
+        [formControl]="name"
+      />
     </div>
+    <p>Value: {{ name.value }}</p>
   </section>
 
   <section class="character-grid">
