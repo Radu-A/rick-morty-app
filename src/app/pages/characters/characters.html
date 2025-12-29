@@ -1,8 +1,7 @@
 <main class="container">
   <app-search-input (outputValue)="handleSearch($event)"></app-search-input>
-  <p>{{ outputValue }}</p>
   <section class="character-grid">
-    @for (character of (characterList$ | async); track $index) {
+    @for (character of (characterList$ | async); track character.id) {
     <app-character-card [character]="character"></app-character-card>
     }
   </section>
