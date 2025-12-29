@@ -6,8 +6,8 @@
     }
   </section>
   <section class="pagination">
-    <button class="btn-nav">Previous</button>
-    <span class="page-info">Page 1 of 42</span>
-    <button class="btn-nav">Next</button>
+    <button class="btn-nav" (click)="handlePrev()">Previous</button>
+    <span class="page-info">Page {{ currentPage }} of 42</span>
+    <button class="btn-nav" (click)="handleNext()">Next</button>
   </section>
 </main>
