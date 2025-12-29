@@ -1,24 +1,11 @@
 <main class="container">
-  <section class="search-section">
-    <img src="pngegg.png" alt="Logo" class="logo" />
-    <div class="search-container">
-      <input
-        class="search-input"
-        id="name"
-        type="text"
-        placeholder="Name of the character..."
-        [formControl]="name"
-      />
-    </div>
-    <p>Value: {{ name.value }}</p>
-  </section>
-
+  <app-search-input (outputValue)="handleSearch($event)"></app-search-input>
+  <p>{{ outputValue }}</p>
   <section class="character-grid">
-    @for (character of characterList$ | async; track character.id) {
+    @for (character of (characterList$ | async); track $index) {
     <app-character-card [character]="character"></app-character-card>
     }
   </section>
-
   <section class="pagination">
     <button class="btn-nav">Previous</button>
     <span class="page-info">Page 1 of 42</span>

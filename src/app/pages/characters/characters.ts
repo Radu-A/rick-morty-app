@@ -1,25 +1,24 @@
 import { Component, inject } from '@angular/core';
+import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, startWith, switchMap } from 'rxjs';
 import { CharacterService } from '../../services/character.service';
 import { CharacterCard } from '../../shared/character-card/character-card';
+import { SearchInput } from '../../shared/search-input/search-input';
 import { CharacterInterface } from '../../models/character.model';
 
 @Component({
   selector: 'app-characters',
-  imports: [ReactiveFormsModule, AsyncPipe, CharacterCard],
+  imports: [SearchInput, AsyncPipe, CharacterCard],
   templateUrl: './characters.html',
   styleUrl: './characters.css',
 })
 export class Characters {
-  characterService = inject(CharacterService);
-  // characterList$ = this.characterService.getAllCharacters();
-  name = new FormControl('');
-  characterList$ = this.name.valueChanges.pipe(
-    startWith(''),
-    debounceTime(1000),
-    distinctUntilChanged(),
-    switchMap((valor) => this.characterService.getAllCharacters(valor))
+  service = inject(CharacterService);
+  private searchSubject$ = new BehaviorSubject<string>('');
+  characterList$: Observable<CharacterInterface[]> = this.searchSubject$.pipe(
+    switchMap((term) => this.service.getAllCharacters(term))
   );
+  handleSearch(term: string): void {
+    this.searchSubject$.next(term);
+  }
 }
