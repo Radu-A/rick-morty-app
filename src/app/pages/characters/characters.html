@@ -1,17 +1,10 @@
 <main class="container">
-  <section class="search-section">
-    <img src="pngegg.png" alt="Logo" class="logo" />
-    <div class="search-container">
-      <input type="text" placeholder="Search characters (RxJS practice...)" class="search-input" />
-    </div>
-  </section>
-
+  <app-search-input (outputValue)="handleSearch($event)"></app-search-input>
   <section class="character-grid">
-    @for (character of characterList$ | async; track character.id) {
+    @for (character of (characterList$ | async); track character.id) {
     <app-character-card [character]="character"></app-character-card>
     }
   </section>
-
   <section class="pagination">
     <button class="btn-nav">Previous</button>
     <span class="page-info">Page 1 of 42</span>
