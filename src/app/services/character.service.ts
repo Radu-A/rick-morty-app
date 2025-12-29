@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { ResponseInterface, CharacterInterface } from '../models/character.model';
 
@@ -10,14 +10,14 @@ export class CharacterService {
   private baseUrl = 'https://rickandmortyapi.com/api/character';
 
   constructor(private http: HttpClient) {}
-  getAllCharacters(name: string | null): Observable<CharacterInterface[]> {
-    if (!name) {
-      return this.http
-        .get<ResponseInterface>(this.baseUrl)
-        .pipe(map((response: ResponseInterface) => response.results));
+  getCharacters(name: string | null, page: number | null): Observable<CharacterInterface[]> {
+    let queryParams = new HttpParams();
+    if (name) {
+      queryParams = queryParams.set('name', name.toLocaleLowerCase());
     }
+    queryParams = queryParams.set('page', page?.toString() ?? '1');
     return this.http
-      .get<ResponseInterface>(`${this.baseUrl}/?name=${name.toLowerCase()}`)
+      .get<ResponseInterface>(this.baseUrl, { params: queryParams })
       .pipe(map((response: ResponseInterface) => response.results));
   }
 }
