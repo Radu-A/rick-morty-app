@@ -22,6 +22,9 @@
   flex-direction: column;
   gap: 5px;
 }
+.card-name {
+  height: 3rem;
+}
 .status {
   display: flex;
   align-items: center;
