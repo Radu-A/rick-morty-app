@@ -22,6 +22,9 @@
   flex-direction: column;
   gap: 5px;
 }
+.card-name {
+  height: 3rem;
+}
 .status {
   display: flex;
   align-items: center;
@@ -39,6 +42,13 @@
 .text-gray {
   color: var(--text-gray);
   font-size: 0.9rem;
+}
+.location {
+  display: block; /* Asegura que ocupe todo el ancho disponible */
+  white-space: nowrap; /* Evita que el texto salte a la línea de abajo */
+  overflow: hidden; /* Esconde lo que sobra */
+  text-overflow: ellipsis; /* Añade los "..." */
+  width: 100%;
 }
 
 .btn-primary {

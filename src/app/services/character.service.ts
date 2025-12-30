@@ -10,7 +10,8 @@ export class CharacterService {
   private baseUrl = 'https://rickandmortyapi.com/api/character';
 
   constructor(private http: HttpClient) {}
-  getCharacters(name: string | null, page: number | null): Observable<CharacterInterface[]> {
+
+  getCharacters(name: string | null, page: number | null): Observable<ResponseInterface> {
     let queryParams = new HttpParams();
     if (name) {
       queryParams = queryParams.set('name', name.toLocaleLowerCase());
@@ -18,6 +19,6 @@ export class CharacterService {
     queryParams = queryParams.set('page', page?.toString() ?? '1');
     return this.http
       .get<ResponseInterface>(this.baseUrl, { params: queryParams })
-      .pipe(map((response: ResponseInterface) => response.results));
+      .pipe(map((response: ResponseInterface) => response));
   }
 }
