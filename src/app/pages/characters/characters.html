@@ -1,13 +1,17 @@
 <main class="container">
   <app-search-input (outputValue)="handleSearch($event)"></app-search-input>
+  @if (characterList$ | async; as response) {
   <section class="character-grid">
-    @for (character of (characterList$ | async); track character.id) {
+    @for (character of response.results; track character.id) {
     <app-character-card [character]="character"></app-character-card>
     }
   </section>
   <section class="pagination">
-    <button class="btn-nav" (click)="handlePrev()">Previous</button>
-    <span class="page-info">Page {{ currentPage }} of 42</span>
-    <button class="btn-nav" (click)="handleNext()">Next</button>
+    <button class="btn-nav" (click)="handlePrev()" [disabled]="currentPage <= 1">Previous</button>
+    <span class="page-info">Page {{ currentPage }} of {{ response.info.pages }}</span>
+    <button class="btn-nav" (click)="handleNext()" [disabled]="currentPage >= response.info.pages">
+      Next
+    </button>
   </section>
+  }
 </main>

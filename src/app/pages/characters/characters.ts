@@ -5,6 +5,7 @@ import { CharacterService } from '../../services/character.service';
 import { CharacterCard } from '../../shared/character-card/character-card';
 import { SearchInput } from '../../shared/search-input/search-input';
 import { CharacterInterface } from '../../models/character.model';
+import { ResponseInterface } from '../../models/character.model';
 
 @Component({
   selector: 'app-characters',
@@ -13,13 +14,14 @@ import { CharacterInterface } from '../../models/character.model';
   styleUrl: './characters.css',
 })
 export class Characters {
+  service = inject(CharacterService);
+
   private searchSubject$ = new BehaviorSubject<string>('');
   private pageSubject$ = new BehaviorSubject<number>(1);
-  service = inject(CharacterService);
 
   currentPage = 1;
 
-  characterList$: Observable<CharacterInterface[]> = combineLatest([
+  characterList$: Observable<ResponseInterface> = combineLatest([
     this.searchSubject$,
     this.pageSubject$,
   ]).pipe(
