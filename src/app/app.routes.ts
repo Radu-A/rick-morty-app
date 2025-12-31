@@ -10,7 +10,7 @@ export const AppRoutes: Routes = [
     title: 'Characters',
   },
   {
-    path: 'details',
+    path: 'details/:id',
     component: Details,
     title: 'Details',
   },
