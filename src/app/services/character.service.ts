@@ -7,7 +7,7 @@ import { ResponseInterface, CharacterInterface } from '../models/character.model
   providedIn: 'root',
 })
 export class CharacterService {
-  private baseUrl = 'https://rickandmortyapi.com/api/character';
+  private baseUrl = 'https://rickandmortyapi.com/api/character/';
 
   constructor(private http: HttpClient) {}
 
@@ -17,8 +17,11 @@ export class CharacterService {
       queryParams = queryParams.set('name', name.toLocaleLowerCase());
     }
     queryParams = queryParams.set('page', page?.toString() ?? '1');
-    return this.http
-      .get<ResponseInterface>(this.baseUrl, { params: queryParams })
-      .pipe(map((response: ResponseInterface) => response));
+    return this.http.get<ResponseInterface>(this.baseUrl, { params: queryParams });
+  }
+
+  getCharacterById(id: string): Observable<CharacterInterface> {
+    let queryParams = new HttpParams().set('id', id);
+    return this.http.get<CharacterInterface>(`${this.baseUrl}${id}`);
   }
 }

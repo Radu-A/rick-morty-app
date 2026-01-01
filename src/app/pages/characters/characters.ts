@@ -1,11 +1,21 @@
 import { Component, inject } from '@angular/core';
-import { BehaviorSubject, Observable, switchMap, combineLatest } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  switchMap,
+  combineLatest,
+  map,
+  startWith,
+  catchError,
+  of,
+  tap,
+} from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { CharacterService } from '../../services/character.service';
 import { CharacterCard } from '../../shared/character-card/character-card';
 import { SearchInput } from '../../shared/search-input/search-input';
-import { CharacterInterface } from '../../models/character.model';
 import { ResponseInterface } from '../../models/character.model';
+import { StateInterface } from '../../models/state.model';
 
 @Component({
   selector: 'app-characters',
@@ -21,12 +31,27 @@ export class Characters {
 
   currentPage = 1;
 
-  characterList$: Observable<ResponseInterface> = combineLatest([
+  listState$: Observable<StateInterface<ResponseInterface>> = combineLatest([
     this.searchSubject$,
     this.pageSubject$,
   ]).pipe(
+    tap(([name, page]) => console.log(`Initializing search of ${name}, at page ${page}`)),
     switchMap(([name, page]) => {
-      return this.service.getCharacters(name, page);
+      return this.service.getCharacters(name, page).pipe(
+        map((result) => ({
+          loading: false,
+          data: result,
+          error: null,
+        })),
+        startWith({
+          loading: true,
+          data: null,
+          error: null,
+        }),
+        catchError((err) =>
+          of({ loading: false, data: null, error: 'Something went fucking wrong.' })
+        )
+      );
     })
   );
 
