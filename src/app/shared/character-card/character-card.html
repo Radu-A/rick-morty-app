@@ -14,6 +14,6 @@
       <span class="text-gray">Last known location:</span>
       <p class="location">{{ character().location.name }}</p>
     </div>
-    <button class="btn-primary">View Details</button>
+    <a [routerLink]="['/details', character().id]" class="btn-primary">View Details</a>
   </div>
 </article>
