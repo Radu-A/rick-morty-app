@@ -1,0 +1,43 @@
+<div class="details-container">
+  <button [routerLink]="['/locations']" class="btn-back">← Back to Locations</button>
+
+  @if (locationState$ | async; as state) { @if (state.loading) {
+  <div class="message-card">
+    <h1>Scanning sector...</h1>
+  </div>
+  } @else if (state.error) {
+  <div class="message-card error">
+    <h1>⚠️ Signal Lost: {{ state.error }}</h1>
+  </div>
+  } @else if (state.data) {
+  <div class="location-card">
+    <div class="location-header">
+      <div class="icon-wrapper">
+        <span>🪐</span>
+      </div>
+      <div class="header-content">
+        <span class="location-type">{{ state.data.type }}</span>
+        <h1>{{ state.data.name }}</h1>
+      </div>
+    </div>
+
+    <div class="detail-content">
+      <div class="data-display">
+        <div class="data-row">
+          <span class="label">System ID</span>
+          <span class="value">#{{ state.data.id }}</span>
+        </div>
+
+        <div class="dimension-box">
+          <span class="label">Dimension Coordinate</span>
+          <p class="dimension-value">
+            {{ state.data.dimension === 'unknown' ? 'Unknown Dimension' : state.data.dimension }}
+          </p>
+        </div>
+
+        <div class="status-indicator"><span class="status-dot"></span> Active Sector</div>
+      </div>
+    </div>
+  </div>
+  } }
+</div>
