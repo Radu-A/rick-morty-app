@@ -2,11 +2,13 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(39, 43, 51, 0.9);
-  backdrop-filter: blur(10px);
-  border-bottom: 2px solid var(--portal-green);
-  padding: 10px 0;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  /* Hacemos el fondo un poco más oscuro para contraste */
+  background: rgba(39, 43, 51, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(151, 206, 76, 0.3);
+  padding: 12px 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .header-container {
@@ -15,54 +17,121 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 24px;
+}
+
+/* --- LOGO Y MARCA --- */
+.brand-link {
+  text-decoration: none;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
+  transition: transform 0.3s ease;
+}
+
+.brand:hover .header-logo {
+  transform: rotate(-5deg) scale(1.05);
+  filter: drop-shadow(0 0 8px var(--portal-green));
 }
 
 .header-logo {
-  height: 50px;
-  filter: drop-shadow(0 0 5px var(--portal-green));
+  height: 45px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .app-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  letter-spacing: 1px;
+  font-size: 1.4rem;
+  font-weight: 800; /* Más grueso */
+  letter-spacing: 0.5px;
   color: var(--text-white);
+  text-transform: uppercase; /* Queda más "título de serie" */
 }
 
 .highlight {
   color: var(--portal-green);
+  text-shadow: 0 0 10px rgba(151, 206, 76, 0.4);
 }
 
+/* --- NAVEGACIÓN --- */
 .nav-links {
   display: flex;
-  gap: 30px;
+  gap: 15px; /* Reducimos un poco el gap para usar paddings en los items */
 }
 
 .nav-item {
   text-decoration: none;
-  color: var(--text-white);
-  font-weight: 500;
-  font-size: 1.1rem;
+  color: var(--text-gray); /* Empezamos con gris para que destaque el blanco al hover */
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 8px 16px;
+  border-radius: 25px; /* Forma de píldora */
   transition: all 0.3s ease;
-  padding: 5px 10px;
-  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid transparent; /* Evita saltos al añadir borde luego */
 }
 
+.icon {
+  font-size: 1.2rem;
+}
+
+/* Hover State */
 .nav-item:hover {
   color: var(--rick-blue);
-  text-shadow: 0 0 8px var(--rick-blue);
+  background: rgba(0, 176, 200, 0.1);
+  transform: translateY(-2px);
+  text-shadow: 0 0 8px rgba(0, 176, 200, 0.5);
 }
 
-/* Clase para cuando el enlace está activo en Angular */
+/* Active State (Angular routerLinkActive) */
 .nav-item.active {
-  background: rgba(151, 206, 76, 0.2);
+  background: rgba(151, 206, 76, 0.15);
   color: var(--portal-green);
-  border-bottom: 2px solid var(--portal-green);
+  border-color: var(--portal-green);
+  box-shadow: 0 0 15px rgba(151, 206, 76, 0.2);
+}
+
+.nav-item.active .icon {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* --- ANIMACIÓN FLOTANTE PARA ICONOS ACTIVOS --- */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* --- RESPONSIVE (Móviles) --- */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .nav-item {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+
+  .link-text {
+    /* Opcional: Ocultar texto en móviles muy pequeños y dejar solo iconos */
+    /* display: none; */
+  }
 }
