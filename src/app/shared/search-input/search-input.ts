@@ -1,11 +1,10 @@
-import { Component, inject, output } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
+import { Component, output } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, startWith, distinctUntilChanged, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-search-input',
-  imports: [ReactiveFormsModule, AsyncPipe],
+  imports: [ReactiveFormsModule],
   templateUrl: './search-input.html',
   styleUrl: './search-input.css',
 })
