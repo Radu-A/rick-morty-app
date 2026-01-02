@@ -1,12 +1,21 @@
 <div class="details-container">
-  <button class="btn-back">← Back to Portal</button>
+  <button [routerLink]="['/']" class="btn-back">← Back to Portal</button>
 
+  @if (characterState$ | async; as character) { @if (character.loading) {
+  <div class="detail-card">
+    <h1>Loading character...</h1>
+  </div>
+  } @if (character.error) {
+  <div class="detail card">
+    <h1>{{ character.error }}</h1>
+  </div>
+  } @if (character.data) {
   <div class="detail-card">
     <div class="detail-hero">
-      <img src="https://rickandmortyapi.com/api/character/avatar/1.jpeg" alt="Rick" />
+      <img [src]="character.data.image" [alt]="character.data.name" />
       <div class="hero-text">
-        <h1>Rick Sanchez</h1>
-        <p class="badge">Origin: Earth (C-137)</p>
+        <h1>{{ character.data.name }} Name</h1>
+        <p class="badge">{{ character.data.location.name }}</p>
       </div>
     </div>
 
@@ -14,27 +23,22 @@
       <div class="info-grid">
         <div class="info-item">
           <span>Status:</span>
-          <p>Alive</p>
+          <p>{{ character.data.status }}</p>
         </div>
         <div class="info-item">
           <span>Species:</span>
-          <p>Human</p>
+          <p>{{ character.data.species }}</p>
         </div>
         <div class="info-item">
           <span>Gender:</span>
-          <p>Male</p>
+          <p>{{ character.data.gender }}</p>
         </div>
         <div class="info-item">
           <span>Location:</span>
-          <p>Citadel of Ricks</p>
+          <p>{{ character.data.name }}</p>
         </div>
-      </div>
-
-      <h3>Featured in Episodes:</h3>
-      <div class="episode-list">
-        <span class="episode-tag">S01E01</span>
-        <span class="episode-tag">S01E02</span>
       </div>
     </div>
   </div>
+  } }
 </div>
