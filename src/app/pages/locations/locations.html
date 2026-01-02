@@ -1,0 +1,38 @@
+<main class="container">
+  <app-search-input (outputValue)="handleSearch($event)"></app-search-input>
+
+  @if (listState$ | async; as state) { @if (state.loading) {
+  <section class="message-container">
+    <h1>Loading locations...</h1>
+  </section>
+  } @if (state.error) {
+  <section class="message-container">
+    <h1>{{ state.error }}</h1>
+  </section>
+  } @if (state.data) {
+  <section class="location-grid">
+    @for (location of state.data.results; track $index) {
+    <app-location-card [location]="location"></app-location-card>
+    }
+  </section>
+  <section class="pagination">
+    <button
+      class="btn-nav"
+      type="button"
+      (click)="handlePrevious()"
+      [disabled]="this.currentPage <= 1"
+    >
+      Previous
+    </button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button
+      class="btn-nav"
+      type="button"
+      (click)="handleNext()"
+      [disabled]="currentPage >= totalPages"
+    >
+      Next
+    </button>
+  </section>
+  } }
+</main>
