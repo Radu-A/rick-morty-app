@@ -28,7 +28,6 @@ export class Locations {
   server = inject(LocationServer);
   searchForm = new FormControl('');
 
-  currentPage = 1;
   totalPages = 0;
 
   searchValue$ = new BehaviorSubject<string>('');
@@ -69,12 +68,10 @@ export class Locations {
   }
 
   handlePrevious() {
-    this.currentPage -= 1;
-    this.currentPage$.next(this.currentPage);
+    this.currentPage$.next(this.currentPage$.value - 1);
   }
 
   handleNext() {
-    this.currentPage += 1;
-    this.currentPage$.next(this.currentPage);
+    this.currentPage$.next(this.currentPage$.value + 1);
   }
 }

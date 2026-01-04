@@ -20,16 +20,16 @@
       class="btn-nav"
       type="button"
       (click)="handlePrevious()"
-      [disabled]="this.currentPage <= 1"
+      [disabled]="currentPage$.value <= 1"
     >
       Previous
     </button>
-    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <span>Page {{ currentPage$ | async }} of {{ totalPages }}</span>
     <button
       class="btn-nav"
       type="button"
       (click)="handleNext()"
-      [disabled]="currentPage >= totalPages"
+      [disabled]="currentPage$.value >= totalPages"
     >
       Next
     </button>
