@@ -1,0 +1,84 @@
+.card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  height: 100%;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px var(--portal-green);
+  border-color: var(--portal-green);
+}
+
+/* Sustitución de la imagen */
+.card-header-visual {
+  height: 100px;
+  background: linear-gradient(135deg, var(--rick-blue), var(--portal-green));
+  display: flex;
+  align-items: flex-end;
+  padding: 15px;
+  position: relative;
+}
+
+.type-badge {
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.card-info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 15px;
+}
+
+.card-name {
+  font-size: 1.4rem;
+  margin: 0;
+  color: white;
+  /* Truncar texto si el nombre es muy largo */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.dimension-text {
+  color: var(--portal-green);
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: block;
+  margin-top: 5px;
+}
+
+.text-gray {
+  color: var(--text-gray);
+  font-size: 0.85rem;
+}
+
+.btn-primary {
+  margin-top: auto; /* Empuja el botón al final */
+  background: var(--rick-blue);
+  text-align: center;
+  text-decoration: none;
+  padding: 12px;
+  color: white;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background: #20948b; /* Un tono más oscuro del azul de Rick */
+}

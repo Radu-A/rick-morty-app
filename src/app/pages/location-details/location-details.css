@@ -1,0 +1,176 @@
+.details-container {
+  max-width: 700px; /* Un poco más estrecho para que parezca una ficha técnica */
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.btn-back {
+  background: transparent;
+  color: var(--text-gray);
+  border: none;
+  padding: 8px 0;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-weight: bold;
+  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-back:hover {
+  color: var(--portal-green);
+  text-shadow: 0 0 8px rgba(151, 206, 76, 0.4);
+}
+
+.message-card {
+  text-align: center;
+  padding: 40px;
+  background: var(--card-bg);
+  border-radius: 15px;
+  color: var(--text-white);
+}
+
+/* --- TARJETA PRINCIPAL --- */
+.location-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Cabecera decorativa */
+.location-header {
+  /* Degradado diagonal usando los colores de la serie */
+  background: linear-gradient(135deg, var(--bg-color) 0%, #2c5e63 100%);
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 4px solid var(--rick-blue);
+  position: relative;
+}
+
+/* Un brillo verde decorativo detrás */
+.location-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(151, 206, 76, 0.1));
+}
+
+.icon-wrapper {
+  font-size: 3rem;
+  background: rgba(0, 0, 0, 0.3);
+  height: 80px;
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid var(--portal-green);
+  box-shadow: 0 0 15px var(--portal-green);
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-content h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: var(--text-white);
+  line-height: 1.1;
+}
+
+.location-type {
+  color: var(--rick-blue);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* --- CONTENIDO --- */
+.detail-content {
+  padding: 30px;
+}
+
+.data-display {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.data-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+}
+
+.label {
+  color: var(--text-gray);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.value {
+  color: var(--text-white);
+  font-weight: bold;
+  font-family: monospace; /* Fuente estilo código para el ID */
+  font-size: 1.1rem;
+}
+
+/* Caja especial para la dimensión */
+.dimension-box {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+  border-left: 4px solid var(--portal-green);
+  margin-top: 10px;
+}
+
+.dimension-value {
+  font-size: 1.5rem;
+  margin: 5px 0 0 0;
+  color: var(--text-white);
+  font-weight: bold;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--text-gray);
+  margin-top: 10px;
+  justify-content: flex-end;
+}
+
+.status-dot {
+  height: 8px;
+  width: 8px;
+  background-color: var(--portal-green);
+  border-radius: 50%;
+  box-shadow: 0 0 5px var(--portal-green);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
