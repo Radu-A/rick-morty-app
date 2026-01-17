@@ -12,3 +12,5 @@ const USERS: UserModel[] = [
     password: 'abc123',
   },
 ];
+
+export default USERS;

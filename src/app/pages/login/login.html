@@ -1,8 +1,32 @@
 <h1>Hola de nuevo</h1>
-<form [formGroup]="loginForm">
+<form class="login-form" [formGroup]="loginForm" (ngSubmit)="tryLogin()">
   <label for="email">Email</label>
   <input type="text" id="email" formControlName="email" />
 
+  @if (email?.invalid && email?.touched) {
+    <div class="error-message">
+      @if (email?.hasError('required')) {
+        <span>Email field is required</span>
+      }
+      @if (email?.hasError('email')) {
+        <span>Invalid email format</span>
+      }
+    </div>
+  }
+
   <label for="password">Password</label>
   <input type="password" id="password" formControlName="password" />
+
+  @if (password?.invalid && password?.touched) {
+    <div class="error-message">
+      @if (password?.hasError('required')) {
+        <span>Password field is required</span>
+      }
+      @if (password?.hasError('minlength')) {
+        <span>Minimum 6 characters</span>
+      }
+    </div>
+  }
+
+  <button type="button">Login</button>
 </form>

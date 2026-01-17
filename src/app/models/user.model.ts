@@ -3,3 +3,8 @@ export interface UserModel {
   email: string;
   password: string;
 }
+
+export interface UserState {
+  connected: boolean;
+  message: string;
+}
