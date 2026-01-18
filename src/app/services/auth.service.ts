@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { UserState } from '../models/user.model';
 import USERS from '../users.db';
@@ -8,6 +9,7 @@ import USERS from '../users.db';
 })
 export class AuthService {
   users = USERS;
+  router = inject(Router);
   checkEmailAndPassword(email: string, password: string): UserState {
     const user = this.users.find((user) => user.email === email);
     if (!user) return { connected: false, message: "This email doesn't exist in sistem." };
@@ -22,6 +24,8 @@ export class AuthService {
     };
 
     localStorage.setItem('rmToken', JSON.stringify(token));
+
+    this.router.navigate(['/']);
 
     return { connected: true, message: 'User connected' };
   }
