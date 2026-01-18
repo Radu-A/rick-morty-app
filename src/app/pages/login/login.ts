@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { UserModel } from '../../models/user.model';
@@ -12,6 +12,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class Login {
   service = inject(AuthService);
+  loginMessage = signal<string | undefined>(undefined);
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -29,7 +30,8 @@ export class Login {
   tryLogin() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      this.service.checkEmailAndPassword(email!, password!);
+      const response = this.service.checkEmailAndPassword(email!, password!);
+      this.loginMessage.set(response.message);
     } else {
       this.loginForm.markAllAsTouched();
     }

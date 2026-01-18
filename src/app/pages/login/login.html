@@ -28,5 +28,11 @@
     </div>
   }
 
-  <button type="button">Login</button>
+  <button type="submit">Login</button>
 </form>
+
+@if (loginMessage()) {
+  <div class="login-message">
+    <h1>{{ loginMessage() }}</h1>
+  </div>
+}
