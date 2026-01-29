@@ -1,12 +1,16 @@
+// angular
 import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
-
+// third part
+import { InputTextModule } from 'primeng/inputtext';
+import { FloatLabel } from 'primeng/floatlabel';
+// own dependencies
 import { UserModel } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, InputTextModule, FloatLabel],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })

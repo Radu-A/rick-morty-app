@@ -5,3 +5,8 @@
 .ng-touched {
   border: 1px solid yellow;
 } */
+
+.login-input {
+  background-color: white;
+  color: var(--bg-color);
+}

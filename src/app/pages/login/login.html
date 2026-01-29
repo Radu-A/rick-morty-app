@@ -1,7 +1,16 @@
 <h1>Hola de nuevo</h1>
 <form class="login-form" [formGroup]="loginForm" (ngSubmit)="tryLogin()">
-  <label for="email">Email</label>
-  <input type="text" id="email" formControlName="email" />
+  <p-floatlabel variant="on">
+    <input
+      pInputText
+      class="login-input"
+      id="email"
+      type="text"
+      formControlName="email"
+      autocomplete="off"
+    />
+    <label for="email">Email</label>
+  </p-floatlabel>
 
   @if (email?.invalid && email?.touched) {
     <div class="error-message">
@@ -14,8 +23,17 @@
     </div>
   }
 
-  <label for="password">Password</label>
-  <input type="password" id="password" formControlName="password" />
+  <p-floatlabel variant="on">
+    <input
+      pInputText
+      class="login-input"
+      type="text"
+      id="password"
+      formControlName="password"
+      autocomplete="off"
+    />
+    <label for="password">Password</label>
+  </p-floatlabel>
 
   @if (password?.invalid && password?.touched) {
     <div class="error-message">
@@ -28,7 +46,7 @@
     </div>
   }
 
-  <button type="submit">Login</button>
+  <button class="login-button" type="submit">Login</button>
 </form>
 
 @if (loginMessage()) {
